@@ -9,3 +9,4 @@ while a < 10
   sleep(5)
   puts pin.get_value
   a = a + 1
+end

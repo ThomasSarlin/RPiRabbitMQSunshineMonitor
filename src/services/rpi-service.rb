@@ -15,7 +15,7 @@ class RpiService
     end
   end
   def isActive
-    @pin
+    @pin.nil?
   end
   def getSunshineData
     value = defined? (@pin) && @pin.get_value || nil

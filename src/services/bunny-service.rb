@@ -16,7 +16,7 @@ class BunnyService
     end
   end
   def isActive
-    @connection
+    @connection.nil?
   end
   def sendSunshineData(data)
     @channel.default_exchange.publish(data, routing_key: @queue.name)

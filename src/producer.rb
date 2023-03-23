@@ -1,34 +1,19 @@
-require 'raspi-gpio'
-require 'bunny'
-require 'json'
+require './src/services/bunny-service.rb'
+require './src/services/rpi-service.rb'
 
-begin
-  pin = GPIO.new(4, IN)
-rescue Exception => exception
-  STDERR.puts exception.message
+rabbitQueue = 'raspi-sunshine-monitor'
+bunnyService = BunnyService.new(rabbitQueue)
+rpiService = RpiService.new
+
+if !bunnyService.isActive || !rpiService.isActive
+  puts 'One or more services as not not active'
+  exit
 else
-  puts "Connected to rPI"
-ensure
-  puts "Error connecting to rPI"
+  puts 'Initializing service loop'
+  while true do
+    BunnyService.sendSunshineData(rpiService.getSunshineData)
+    sleep(20)
+  end
+  connection.close
 end
 
-begin
-  connection = Bunny.new
-  connection.start
-  channel = connection.create_channel
-  queue = channel.queue('raspi-sunshine-monitor')
-rescue Exception => exception
-  STDERR.puts exception.message
-else
-  puts "Connected to RabbitMQ"
-end
-
-while true do
-  value = defined? (pin) && pin.get_value || nil
-  sunshine = defined? (value) && value > 20 || false
-  puts('Sending sunshine data')
-  channel.default_exchange.publish({value: value, sunshine: sunshine, date: Time.new.utc}.to_json, routing_key: queue.name)
-  sleep(20)
-end
-
-connection.close

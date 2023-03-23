@@ -8,7 +8,7 @@ updateRate = 20
 
 #Initializing services.
 bunnyService = BunnyService.new(rabbitQueueName)
-rpiService = RpiService.new
+rpiService = RpiService.new(4, nil)
 
 if !bunnyService.isActive || !rpiService.isActive
   puts 'One or more services are not active'

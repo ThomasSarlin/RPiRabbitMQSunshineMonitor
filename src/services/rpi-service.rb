@@ -3,24 +3,26 @@ require 'json'
 
 
 class RpiService
-  def initialize
+  def initialize (lightSensorInputPin = nil, tempInputPin = nil)
     begin
-      @pin = GPIO.new(4, IN)
+      @tempreaturePin = defined?(tempInputPin) && GPIO.new(tempInputPin, IN) || nil
+      @lightSensorPin = defined?(lightSensorInputPin) && GPIO.new(lightSensorInputPin, IN) || nil
     rescue Exception => exception
       puts "---Error connecting to rPI---"
-      @pin = nil
+      @tempreaturePin = nil
+      @lightSensorPin = nil
       STDERR.puts exception.message
     else
       puts "---Connected to rPI---"
     end
   end
   def isActive
-    @pin.nil?
+    !@lightSensorPin.nil? || !@tempreaturePin.nil?
   end
   def getSunshineData
-    value = defined? (@pin) && @pin.get_value || nil
-    sunshine = defined? (value) && value > 20 || false
+    tempValue = defined? (@tempreaturePin) && @tempreaturePin.get_value || nil
+    lightSensorValue = defined? (@lightSensorPin) && @lightSensorPin.get_value || nil
 
-    {value: value, sunshine: sunshine, date: Time.new.utc}.to_json
+    {lightSensorValue: lightSensorValue, tempuratureValue: temperatureValue, date: Time.new.utc}.to_json
   end
 end

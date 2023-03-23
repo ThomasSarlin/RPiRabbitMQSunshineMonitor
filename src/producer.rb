@@ -1,9 +1,13 @@
 require './src/services/bunny-service.rb'
 require './src/services/rpi-service.rb'
 
-rabbitQueue = 'raspi-sunshine-monitor'
-updateRate = 20 #How often would you like to recieve updates from the raspberry Pi (seconds)
-bunnyService = BunnyService.new(rabbitQueue)
+rabbitQueueName = 'raspi-sunshine-monitor'
+
+#How often would you like to recieve updates from the raspberry Pi (seconds)
+updateRate = 20
+
+#Initializing services.
+bunnyService = BunnyService.new(rabbitQueueName)
 rpiService = RpiService.new
 
 if !bunnyService.isActive || !rpiService.isActive

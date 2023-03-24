@@ -6,11 +6,11 @@ rabbitQueueName = 'raspi-sunshine-monitor'
 #How often would you like to recieve updates from the raspberry Pi (seconds)
 updateRate = 20
 lightSensorInputPin = 4;
-temperatureInputPin = nil;
+temperatureIOPin = 7;
 
 #Initializing services.
 bunnyService = BunnyService.new(rabbitQueueName)
-rpiService = RpiService.new(lightSensorInputPin, temperatureInputPin)
+rpiService = RpiService.new(lightSensorInputPin, temperatureIOPin)
 
 if !bunnyService.isActive || !rpiService.isActive
   puts 'One or more services are not active'

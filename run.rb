@@ -5,7 +5,6 @@ options = {}
 options[:publisher] = false
 options[:updateRate] =  20
 options[:lightSensorPin] =  3
-options[:tempSensorPin] =  4
 options[:user]='guest'
 options[:password]='guest'
 options[:queueName] = 'raspi-sunshine-monitor'
@@ -37,9 +36,6 @@ OptionParser.new do |opts|
   end
   opts.on("-q", "--queue-name", "Set queue name") do |q|
     options[:lightSensorPin] =  q
-  end
-  opts.on("-t", "--temp-sensor-pin", "Set light-sensor-pin, default 3") do |t|
-    options[:tempSensorPin] =  t
   end
   opts.on("-H", "--host", "Set rabbit-mq host url") do |h|
     options[:host] =  h

@@ -5,8 +5,8 @@ rabbitQueueName = 'raspi-sunshine-monitor'
 
 #How often would you like to recieve updates from the raspberry Pi (seconds)
 updateRate = 20
-lightSensorInputPin = 4;
-temperatureIOPin = 7;
+lightSensorInputPin = 3;
+temperatureIOPin = 4;
 
 #Initializing services.
 bunnyService = BunnyService.new(rabbitQueueName)

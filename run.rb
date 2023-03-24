@@ -9,7 +9,7 @@ options[:tempSensorPin] =  4
 options[:user]='guest'
 options[:password]='guest'
 options[:queueName] = 'raspi-sunshine-monitor'
-options[:url] = 'http://localhost:5766'
+options[:url] = 'amqp://localhost'
 
 OptionParser.new do |opts|
   opts.banner = "Usage: run.rb [options]"

@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 gem "bunny"
-gem "dotenv"
 gem "json"
 gem "raspi-gpio"
 gem "rpi-dht"
+gem "optparse"

@@ -3,10 +3,10 @@ require 'json'
 require 'rpi/dht'
 
 class RpiService
-  def initialize (lightSensorInputPin = nil, tempIOPin = nil)
+  def initialize (options)
     begin
-      @tempreaturePin = tempIOPin
-      @lightSensorPin = defined?(lightSensorInputPin) && GPIO.new(lightSensorInputPin, IN) || nil
+      @tempreaturePin = options[:tempSensorPin]
+      @lightSensorPin = defined?(options[:lightSensorPin]) && GPIO.new(options[:lightSensorPin], IN) || nil
     rescue Exception => exception
       puts "---Error connecting to rPI---"
       @tempreaturePin = nil

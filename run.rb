@@ -14,7 +14,7 @@ options[:url] = 'amqp://localhost'
 OptionParser.new do |opts|
   opts.banner = "Usage: run.rb [options]"
 
-  opts.on("-pub", "--publisher", "Run as publisher") do |v|
+  opts.on("-p", "--publisher", "Run as publisher") do |v|
     options[:publisher] = true
   end
   opts.on("-P", "--password", "Run as publisher") do |p|

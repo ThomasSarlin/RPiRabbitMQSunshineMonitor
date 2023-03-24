@@ -95,7 +95,6 @@ Usage: run.rb [options]
     -u, --update-rate                Set update-rate of publisher thread
     -l, --light-sensor-pin           Set temp-sensor-pin, default 4
     -q, --queue-name                 Set queue name
-    -t, --temp-sensor-pin            Set light-sensor-pin, default 3
     -H, --host                       Set rabbit-mq host url
     -h, --help                       Prints this help
 ```

@@ -9,7 +9,7 @@ options[:tempSensorPin] =  4
 options[:user]='guest'
 options[:password]='guest'
 options[:queueName] = 'raspi-sunshine-monitor'
-options[:url] = 'amqp://localhost'
+options[:host] = 'localhost'
 
 OptionParser.new do |opts|
   opts.banner = "Usage: run.rb [options]"
@@ -35,8 +35,8 @@ OptionParser.new do |opts|
   opts.on("-t", "--temp-sensor-pin", "Set light-sensor-pin") do |t|
     options[:tempSensorPin] =  t
   end
-  opts.on("-u", "--url", "Set rabbit-mq host url") do |u|
-    options[:url] =  u
+  opts.on("-h", "--host", "Set rabbit-mq host url") do |h|
+    options[:host] =  h
   end
 
   opts.on("-h", "--help", "Prints this help") do

@@ -3,7 +3,7 @@ require 'bunny'
 class BunnyService
   def initialize(options)
     begin
-      @connection = Bunny.new(options[:url])
+      @connection = Bunny.new("amqp://#{options[:user]}:#{options[:password]}@#{options[:host]}")
       @connection.start
       @channel = @connection.create_channel
       @queue = @channel.queue(options[:queueName])

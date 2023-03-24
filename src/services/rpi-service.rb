@@ -1,6 +1,20 @@
 require 'raspi-gpio'
 require 'json'
-require 'rpi/dht'
+require "pathname"
+
+def read_humidity
+  Pathname("/sys/bus/iio/devices/iio\:device0/in_humidityrelative_input").read.to_f / 1000
+rescue => ex
+  sleep 0.5
+  retry
+end
+
+def read_temperature
+  Pathname("/sys/bus/iio/devices/iio\:device0/in_temp_input").read.to_f / 1000
+rescue => ex
+  sleep 0.5
+  retry
+end
 
 class RpiService
   def initialize (options)
@@ -26,12 +40,11 @@ class RpiService
     !@lightSensorPin.nil? || !@tempreaturePin.nil?
   end
   def getSunshineData
-    #tempValue format is {temperature: number, humidity: number, temperature_f: number}
-    tempValue = defined? (@tempreaturePin) && RPi::Dht.read_22(@temperaturePin)|| nil
-
+    temp = read_temperature
+    humitidy = read_humidity
     #returns 1 if ambient light level is above set physical threshold of lightSensor
     lightSensorValue = defined? (@lightSensorPin) && @lightSensorPin.get_value || nil
 
-    {lightSensorValue: lightSensorValue, tempuratureValue: temperatureValue, date: Time.new.utc}.to_json
+    {lightSensorValue: lightSensorValue, temp: temp, humitidy: humitidy, date: Time.new.utc}.to_json
   end
 end

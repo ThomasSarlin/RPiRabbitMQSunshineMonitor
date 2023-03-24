@@ -15,15 +15,19 @@ class BunnyService
       puts "---Connected to RabbitMQ---"
     end
   end
+
   def isActive
     !@connection.nil?
   end
+
   def sendSunshineData(data)
     @channel.default_exchange.publish(data, routing_key: @queue.name)
   end
+
   def close
     @connection.close
   end
+
   def consumeSunShineData
   end
 end

@@ -5,14 +5,14 @@ require "pathname"
 def read_humidity
   Pathname("/sys/bus/iio/devices/iio\:device0/in_humidityrelative_input").read.to_f / 1000
 rescue => ex
-  sleep 0.5
+  sleep 0.25
   retry
 end
 
 def read_temperature
   Pathname("/sys/bus/iio/devices/iio\:device0/in_temp_input").read.to_f / 1000
 rescue => ex
-  sleep 0.5
+  sleep 0.25
   retry
 end
 
@@ -36,9 +36,11 @@ class RpiService
       end
     end
   end
+
   def isActive
     !@lightSensorPin.nil? || !@tempreaturePin.nil?
   end
+
   def getSunshineData
     temp = read_temperature
     humitidy = read_humidity
@@ -47,4 +49,5 @@ class RpiService
 
     {lightSensorValue: lightSensorValue, temp: temp, humitidy: humitidy, date: Time.new.utc}.to_json
   end
+
 end

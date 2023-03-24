@@ -7,7 +7,7 @@ options[:updateRate] =  20
 options[:lightSensorPin] =  3
 options[:tempSensorPin] =  4
 options[:queueName] = 'raspi-sunshine-monitor'
-options[:url] = 'http://localhost:15672'
+options[:url] = 'http://localhost:5766'
 
 OptionParser.new do |opts|
   opts.banner = "Usage: run.rb [options]"

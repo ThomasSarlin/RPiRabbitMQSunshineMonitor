@@ -6,14 +6,22 @@ options[:publisher] = false
 options[:updateRate] =  20
 options[:lightSensorPin] =  3
 options[:tempSensorPin] =  4
+options[:user]='guest'
+options[:password]='guest'
 options[:queueName] = 'raspi-sunshine-monitor'
 options[:url] = 'http://localhost:5766'
 
 OptionParser.new do |opts|
   opts.banner = "Usage: run.rb [options]"
 
-  opts.on("-p", "--publisher", "Run as publisher") do |v|
+  opts.on("-pub", "--publisher", "Run as publisher") do |v|
     options[:publisher] = true
+  end
+  opts.on("-P", "--password", "Run as publisher") do |p|
+    options[:password] = p
+  end
+  opts.on("-U", "--user", "Run as publisher") do |u|
+    options[:user] = u
   end
   opts.on("-u", "--update-rate", "Set update-rate of publisher thread") do |u|
     options[:updateRate] =  u

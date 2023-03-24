@@ -25,7 +25,7 @@ rabbitmqctl set_user_tags username administrator
 rabbitmqctl set_permissions -p / username ".*" ".*" ".*"
 ```
 
-## Install ruby
+## Install ruby on Raspberry Pi
 
 Install rbenv by using the following commands on your pi. (if you're using zsh change .bashrc to .zshrc)
 ```

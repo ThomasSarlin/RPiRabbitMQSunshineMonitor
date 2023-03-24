@@ -17,25 +17,31 @@ OptionParser.new do |opts|
   opts.on("-p", "--publisher", "Run as publisher") do |v|
     options[:publisher] = true
   end
-  opts.on("-P", "--password", "Run as publisher") do |p|
+  opts.on("-U", "--user", "Set username") do |u|
+    options[:user] = u
+  end
+  opts.on("-P", "--password", "Set password for user") do |p|
     options[:password] = p
   end
-  opts.on("-U", "--user", "Run as publisher") do |u|
-    options[:user] = u
+  opts.on("-D", "--use-dht", "Activate DHT-11/22 sensor") do |dht|
+    options[:dht] = true
+  end
+  opts.on("-L", "--use-lightsensor", "Activate lightsensor") do |ls|
+    options[:lightsensor] = true
   end
   opts.on("-u", "--update-rate", "Set update-rate of publisher thread") do |u|
     options[:updateRate] =  u
   end
-  opts.on("-l", "--light-sensor-pin", "Set temp-sensor-pin") do |l|
+  opts.on("-l", "--light-sensor-pin", "Set temp-sensor-pin, default 4") do |l|
     options[:lightSensorPin] =  l
   end
   opts.on("-q", "--queue-name", "Set queue name") do |q|
     options[:lightSensorPin] =  q
   end
-  opts.on("-t", "--temp-sensor-pin", "Set light-sensor-pin") do |t|
+  opts.on("-t", "--temp-sensor-pin", "Set light-sensor-pin, default 3") do |t|
     options[:tempSensorPin] =  t
   end
-  opts.on("-h", "--host", "Set rabbit-mq host url") do |h|
+  opts.on("-H", "--host", "Set rabbit-mq host url") do |h|
     options[:host] =  h
   end
 

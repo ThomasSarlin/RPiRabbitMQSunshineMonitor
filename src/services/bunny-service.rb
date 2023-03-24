@@ -9,10 +9,10 @@ class BunnyService
       @queue = @channel.queue(options[:queueName])
     rescue Exception => exception
       @connection = nil
-      puts "---Error connecting to RabbitMQ---"
+      puts "-- Error connecting to RabbitMQ --"
       STDERR.puts exception.message
     else
-      puts "---Connected to RabbitMQ---"
+      puts "-- Connected to RabbitMQ --"
     end
   end
 

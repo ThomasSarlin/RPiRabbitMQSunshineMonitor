@@ -8,9 +8,12 @@ class Publisher
     @rpiService = RpiService.new(options)
   end
   def run
-    if !@bunnyService.isActive || !@rpiService.isActive
-      puts 'One or more services are not active'
+    if !@bunnyService.isActive
+      puts 'Unable to connect to RabbitMQ, shutting down'
       exit
+    elsif !@rpiService.isActive
+      puts 'No active rPi services, shutting down'
+    exit
     else
       puts 'Initializing service loop'
       while true do

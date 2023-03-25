@@ -28,11 +28,11 @@ OptionParser.new do |opts|
   opts.on("-L", "--use-lightsensor", "Activate lightsensor") do |ls|
     options[:lightsensor] = true
   end
+  opts.on("-l", "--light-sensor-pin=LIGHT_SENSOR_PIN", "Set temp-sensor-pin, default 4") do |l|
+    options[:lightSensorPin] =  l
+  end
   opts.on("-u", "--update-rate=UPDATERATE", "Set update-rate of publisher thread") do |u|
     options[:updateRate] =  u
-  end
-  opts.on("-l", "--light-sensor-pin=LIGHTSENSORPIN", "Set temp-sensor-pin, default 4") do |l|
-    options[:lightSensorPin] =  l
   end
   opts.on("-q", "--queue-name=QUEUENAME", "Set queue name") do |q|
     options[:lightSensorPin] =  q

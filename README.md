@@ -88,13 +88,13 @@ ruby run.rb -p -H hostaddress -q queuename -P password -U username --use-dht --u
 Usage: run.rb [options]
 ```
     -p, --publisher                  Run as publisher
-    -U, --user                       Set username
-    -P, --password                   Set password for user
+    -U, --user=USER                       Set username
+    -P, --password=PASSWORD                  Set password for user
     -D, --use-dht                    Activate DHT-11/22 sensor
     -L, --use-lightsensor            Activate lightsensor
-    -u, --update-rate                Set update-rate of publisher thread
-    -l, --light-sensor-pin           Set temp-sensor-pin, default 4
-    -q, --queue-name                 Set queue name
-    -H, --host                       Set rabbit-mq host url
+    -u, --update-rate=UPDATE_RATE                Set update-rate of publisher thread
+    -l, --light-sensor-pin=LIGHTSENSORPIN           Set temp-sensor-pin, default 4
+    -q, --queue-name=QUEUE_NAME                 Set queue name
+    -H, --host=HOST                       Set rabbit-mq host url
     -h, --help                       Prints this help
 ```

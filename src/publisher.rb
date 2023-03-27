@@ -1,11 +1,12 @@
 require './src/services/bunny-service.rb'
 require './src/services/rpi-service.rb'
+require './src/services/mock-pi-service.rb'
 
 class Publisher
   def initialize(options)
     @updateRate = options[:updateRate]
     @bunnyService = BunnyService.new(options)
-    @rpiService = RpiService.new(options)
+    @rpiService = (options[:mockPi] && MockPi.new) || RpiService.new(options)
   end
   def run
     if !@bunnyService.isActive

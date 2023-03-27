@@ -8,6 +8,7 @@ class BunnyService
       @connection.start
       @channel = @connection.create_channel
       @queue = @channel.queue(options[:queueName])
+      @ttl = options[:ttl]
     rescue Exception => exception
       @connection = nil
       puts "-- Error connecting to RabbitMQ --"
@@ -22,8 +23,7 @@ class BunnyService
   end
 
   def sendSunshineData(data)
-    puts data
-    @channel.default_exchange.publish(data, routing_key: @queue.name)
+    @channel.default_exchange.publish(data, {routing_key: @queue.name, :expiration => @ttl.to_i * 1000})
   end
   def subscribeToQueue
     @queue.subscribe(manual_ack: true) do |delivery_info, metadata, payload|

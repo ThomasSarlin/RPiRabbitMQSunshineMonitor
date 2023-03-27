@@ -30,6 +30,7 @@ class RpiService
   def initialize(options)
     @dhtActive = options[:dht]
     @lsActive = options[:lightsensor]
+    @ttl = options[:ttl]
     if @dhtActive && read_temperature != nil
       puts "-- DHT connected -- "
     elsif @dhtActive

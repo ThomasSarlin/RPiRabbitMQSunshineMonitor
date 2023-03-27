@@ -24,6 +24,9 @@ OptionParser.new do |opts|
   opts.on("-P", "--password=PASSWORD", "Set password for user") do |p|
     options[:password] = p
   end
+  opts.on("-m", "--mockPi", "Run as mock-Pi, i.e. not using actual sensors") do |m|
+    options[:mockPi] = true
+  end
   opts.on("-D", "--use-dht", "Activate DHT-11/22 sensor") do |dht|
     options[:dht] = true
   end

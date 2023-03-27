@@ -48,7 +48,7 @@ class RpiService
 
     #returns 1 if ambient light level is above set physical threshold of lightSensor
     lightSensorValue = @lsActive && defined?(@lightSensorPin) && @lightSensorPin.get_value || nil
-    { sunshine: lightSensorValue.to_i == LOW, temp: temp,humitidy: humidity, date: Time.new.utc}.to_json
+    { sunshine: lightSensorValue.to_i == LOW, temp: temp,humidity: humidity, date: Time.new.utc}.to_json
   end
 end
 

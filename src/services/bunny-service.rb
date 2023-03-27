@@ -1,5 +1,6 @@
 require "bunny"
 require "json"
+require 'terminal-notifier'
 
 class BunnyService
   def initialize(options)
@@ -30,7 +31,9 @@ class BunnyService
     @queue.subscribe(manual_ack: true) do |delivery_info, metadata, payload|
       data = JSON.parse(payload)
       @channel.ack(delivery_info.delivery_tag)
-      "It is currently #{data["sunshine"] ? "SUNNY" : "CLOUDY"} outside, with a temp of #{data["temp"]}C and humidity of #{data["humidity"]}"
+      info = "It is currently #{data["sunshine"] ? "SUNNY" : "CLOUDY"} outside, with a temp of #{data["temp"]}C and humidity of #{data["humidity"]}"
+      puts info
+      TerminalNotifier.notify(info)
     end
   end
 

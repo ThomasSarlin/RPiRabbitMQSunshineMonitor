@@ -20,7 +20,7 @@ class Publisher
         loop do
           @bunnyService.sendSunshineData(@rpiService.getSunshineData)
           sleep(@updateRate)
-          until $exit_app
+          break if $exit_app
         end
         @bunnyService.close
       end

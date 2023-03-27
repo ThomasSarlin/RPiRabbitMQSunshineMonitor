@@ -60,7 +60,7 @@ class RpiService
 
   def getSunshineData
     temp = @dhtActive && read_temperature || nil
-    humitidy = @dhtActive && read_humidity || nil
+    humidity = @dhtActive && read_humidity || nil
 
     #returns 1 if ambient light level is above set physical threshold of lightSensor
     lightSensorValue = @lsActive && defined?(@lightSensorPin) && @lightSensorPin.get_value || nil

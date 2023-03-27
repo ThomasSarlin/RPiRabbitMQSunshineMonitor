@@ -4,10 +4,7 @@ require "json"
 class BunnyService
   def initialize(options)
     begin
-      @connection =
-        Bunny.new(
-          "amqp://#{options[:user]}:#{options[:password]}@#{options[:host]}"
-        )
+      @connection = Bunny.new("amqp://#{options[:user]}:#{options[:password]}@#{options[:host]}")
       @connection.start
       @channel = @connection.create_channel
       @queue = @channel.queue(options[:queueName])
@@ -25,6 +22,7 @@ class BunnyService
   end
 
   def sendSunshineData(data)
+    puts data
     @channel.default_exchange.publish(data, routing_key: @queue.name)
   end
   def subscribeToQueue

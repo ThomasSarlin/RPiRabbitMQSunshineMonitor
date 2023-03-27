@@ -6,11 +6,12 @@ class BunnyService
     begin
       @connection =
         Bunny.new(
-          "amqp://#{options[:user]}:#{options[:password]}@#{options[:host]}"
+          "amqp://#{options[:user]}:#{options[:password]}@#{options[:host]}",
+          :arguments => { "x-message-ttl" => options[:ttl] }
         )
       @connection.start
       @channel = @connection.create_channel
-      @queue = @channel.queue(options[:queueName], :arguments => { "x-message-ttl" => options[:ttl] * 1000 })
+      @queue = @channel.queue(options[:queueName])
     rescue Exception => exception
       @connection = nil
       puts "-- Error connecting to RabbitMQ --"
@@ -29,6 +30,7 @@ class BunnyService
   end
   def subscribeToQueue
     @queue.subscribe(manual_ack: true) do |delivery_info, metadata, payload|
+      puts(payload)
       data = JSON.parse(payload)
       puts "It is currently #{data["sunshine"] ? "SUNNY" : "CLOUDY"} outside, with a temp of #{data["temp"]}C and humidity of #{data["humidity"]}"
       # acknowledge the delivery so that RabbitMQ can mark it for deletion

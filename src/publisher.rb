@@ -17,8 +17,10 @@ class Publisher
     else
       puts 'Initializing service loop'
       Thread.new do
-        loop do sleep(@updateRate) until $exit_app
+        loop do
           @bunnyService.sendSunshineData(@rpiService.getSunshineData)
+          sleep(@updateRate)
+          until $exit_app
         end
         @bunnyService.close
       end

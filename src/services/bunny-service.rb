@@ -6,8 +6,7 @@ class BunnyService
     begin
       @connection =
         Bunny.new(
-          "amqp://#{options[:user]}:#{options[:password]}@#{options[:host]}",
-          :arguments => { "x-message-ttl" => options[:ttl] }
+          "amqp://#{options[:user]}:#{options[:password]}@#{options[:host]}"
         )
       @connection.start
       @channel = @connection.create_channel

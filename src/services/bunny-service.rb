@@ -23,15 +23,14 @@ class BunnyService
   end
 
   def sendSunshineData(data)
-    @channel.default_exchange.publish(data, {routing_key: @queue.name, :expiration => @ttl.to_i * 1000})
+    @channel.default_exchange.publish(data, {routing_key: @queue.name, :expiration => (@ttl.to_i * 1000).to_i})
   end
 
   def subscribeToQueue
     @queue.subscribe(manual_ack: true) do |delivery_info, metadata, payload|
       data = JSON.parse(payload)
-      puts "It is currently #{data["sunshine"] ? "SUNNY" : "CLOUDY"} outside, with a temp of #{data["temp"]}C and humidity of #{data["humidity"]}"
-
       @channel.ack(delivery_info.delivery_tag)
+      "It is currently #{data["sunshine"] ? "SUNNY" : "CLOUDY"} outside, with a temp of #{data["temp"]}C and humidity of #{data["humidity"]}"
     end
   end
 

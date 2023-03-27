@@ -1,4 +1,5 @@
 require './src/services/bunny-service.rb'
+require 'terminal-notifier'
 
 class Subscriber
   def initialize(options)
@@ -11,7 +12,8 @@ class Subscriber
     else
       puts 'Initializing subscriber loop'
       Thread.new do
-        @bunnyService.subscribeToQueue
+        info = @bunnyService.subscribeToQueue
+        TerminalNotifier.notify(info)
         loop do sleep(0.25) until $exit_app
         end
         @bunnyService.close

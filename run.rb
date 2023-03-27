@@ -10,6 +10,7 @@ options[:user]='guest'
 options[:password]='guest'
 options[:queueName] = 'raspi-sunshine-monitor'
 options[:host] = 'localhost'
+options[:ttl] = 60
 $exit_app = false;
 OptionParser.new do |opts|
   opts.banner = "Usage: run.rb [options]"
@@ -41,6 +42,9 @@ OptionParser.new do |opts|
   end
   opts.on("-H", "--host=HOST", "Set rabbit-mq host url") do |h|
     options[:host] =  h
+  end
+  opts.on("-t", "--ttl=TTL", "Set TTL (seconds) of messages on queue") do |ttl|
+    options[:ttl] =  ttl
   end
 
   opts.on("-h", "--help", "Prints this help") do

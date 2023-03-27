@@ -3,7 +3,6 @@ require './src/services/bunny-service.rb'
 class Subscriber
   def initialize(options)
     @bunnyService = BunnyService.new(options)
-    @updateRate = options[:updateRate]
   end
   def run
     if !@bunnyService.isActive

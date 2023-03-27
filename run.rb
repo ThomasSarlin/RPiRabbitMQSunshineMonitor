@@ -1,5 +1,6 @@
 require "optparse"
 require "./src/publisher.rb"
+require "./src/subscriber.rb"
 
 options = {}
 options[:publisher] = false
@@ -9,7 +10,7 @@ options[:user]='guest'
 options[:password]='guest'
 options[:queueName] = 'raspi-sunshine-monitor'
 options[:host] = 'localhost'
-
+$exit_app = false;
 OptionParser.new do |opts|
   opts.banner = "Usage: run.rb [options]"
 
@@ -32,7 +33,8 @@ OptionParser.new do |opts|
     options[:lightSensorPin] =  l
   end
   opts.on("-u", "--update-rate=UPDATERATE", "Set update-rate of publisher thread") do |u|
-    options[:updateRate] =  u
+    puts u
+    options[:updateRate] =  u.to_i
   end
   opts.on("-q", "--queue-name=QUEUENAME", "Set queue name") do |q|
     options[:lightSensorPin] =  q
@@ -53,5 +55,17 @@ if (options[:publisher])
   publisher = Publisher.new(options)
   publisher.run
 else
+  subscrber = Subscriber.new(options)
+  subscrber.run
 end
 
+
+
+puts '[-------------------------------------------------]'
+puts '[-------------------------------------------------]'
+puts '[-------------- Press enter to exit --------------]'
+puts '[-------------------------------------------------]'
+puts '[-------------------------------------------------]'
+if (gets.chomp == "r")
+ $exit_app = true
+end

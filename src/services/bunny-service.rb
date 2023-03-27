@@ -23,7 +23,15 @@ class BunnyService
   def sendSunshineData(data)
     @channel.default_exchange.publish(data, routing_key: @queue.name)
   end
-
+  def subscribeToQueue()
+    @queue.subscribe(manual_ack: true) do |delivery_info, metadata, payload|
+      puts "This is the message: #{payload}"
+      # acknowledge the delivery so that RabbitMQ can mark it for deletion
+      @channel.ack(delivery_info.delivery_tag)
+    end
+  end
+  def confirm
+  end
   def close
     @connection.close
   end

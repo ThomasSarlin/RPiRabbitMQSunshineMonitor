@@ -25,10 +25,10 @@ OptionParser.new do |opts|
   opts.on("-D", "--use-dht", "Activate DHT-11/22 sensor") do |dht|
     options[:dht] = true
   end
-  opts.on("-L", "--use-lightsensor", "Activate lightsensor") do |ls|
+  opts.on("-l", "--use-lightsensor", "Activate lightsensor") do |ls|
     options[:lightsensor] = true
   end
-  opts.on("-l", "--light-sensor-pin=LIGHT_SENSOR_PIN", "Set temp-sensor-pin, default 4") do |l|
+  opts.on("-L", "--lightsensor-pin=SENSORPIN", "Set light-sensor-pin, default 3") do |l|
     options[:lightSensorPin] =  l
   end
   opts.on("-u", "--update-rate=UPDATERATE", "Set update-rate of publisher thread") do |u|
